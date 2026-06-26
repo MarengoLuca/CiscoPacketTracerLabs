@@ -1,7 +1,7 @@
 # 🌐 Esercizio 03: DHCP server su router
 ## 🎯 Obiettivo:
 
-Impostare un Router con funziona di DHCP server
+Impostare un Router con funzione di DHCP server
 Lo scopo dell'esercizio è: 
 - Configurare gli indirizzi IP dei dispositivi
 - Configurare l'interfaccia del Router
