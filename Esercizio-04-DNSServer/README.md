@@ -1,4 +1,4 @@
-# 🌐 Esercizio 03: DNS Server
+# 🌐 Esercizio 04: DNS Server
 ## 🎯 Obiettivo:
 
 Impostare un Server con funzione DNS
