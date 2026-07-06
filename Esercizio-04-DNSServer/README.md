@@ -104,6 +104,50 @@ Minimum = 0ms, Maximum = 5ms, Average = 1ms
 Stesso risultato per .com e .org
 Il comando ping ha verificato la corretta risoluzione del nome DNS tramite il server configurato e successivamente la connettività verso l'indirizzo IP ottenuto.
 
+❓ Cos'è il DNS?
+
+Il DNS (Domain Name System) è un protocollo applicativo che permette di tradurre un nome di dominio nel corrispondente indirizzo IP utilizzato dai dispositivi di rete. Grazie al DNS, non è necessario ricordare gli indirizzi IP numerici per raggiungere un server, ma è sufficiente utilizzare il suo nome.
+
+❓ Come funziona il DNS?
+
+PC
+ │
+ │ 1. Richiesta DNS
+ ▼
+Server DNS
+ │
+ │ 2. Restituisce l'indirizzo IP
+ ▼
+PC
+ │
+ │ 3. Connessione verso l'indirizzo IP ottenuto
+ ▼
+Server
+
+1. Inserimento del nome
+
+Il client inserisce un nome di dominio, ad esempio:
+
+**www.lucamarengo.it**
+
+2. Richiesta DNS
+
+Il client invia una richiesta al server DNS configurato nella propria scheda di rete, chiedendo quale indirizzo IP corrisponda al nome richiesto.
+
+3. Risposta DNS
+
+Il server consulta il proprio database e restituisce l'indirizzo IP associato.
+Ad esempio: www.lucamarengo.it --> 192.168.0.100
+
+4. Comunicazione
+
+Solo dopo aver ottenuto l'indirizzo IP, il client può iniziare la comunicazione con il server.
+
+❓ Perché il DNS è così importante?
+
+I protocolli di rete, come IP, utilizzano esclusivamente indirizzi numerici. Il DNS rappresenta un sistema di traduzione che permette agli utenti di utilizzare nomi facilmente memorizzabili invece di indirizzi IP.
+
+
 📌 Risultato:
 Tutti i dispositivi comunicano correttamente all’interno della stessa rete IP tramite switching Layer 2, il server DNS funziona correttamente e risponde alle richieste dei dispositivi.
 
