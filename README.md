@@ -22,7 +22,7 @@ Raccolta di esercizi di rete con documentazione tecnica
 5. **Telnet e SSH su router**:
    Configurazione di un accesso remoto via Telnet e SSH su un router Cisco. ==> [Esercizio-05](./Esercizio-05-TelnetSSH)
 6. **NTP server - sincronizzazione oraria**:
-   Configurazione di un NTP server e sincronizzazione di tutti i router e Switch della rete.
+   Configurazione di un NTP server e sincronizzazione di tutti i dispositivi nella rete.
 7. **Syslog server**:
    Configurazione di dispositivi Cisco per inviare log a un server Syslog centralizzato
 8. **Password e banner di sicurezza**:
