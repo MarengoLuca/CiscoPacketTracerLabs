@@ -51,11 +51,12 @@ La configurazione è stata effettuata tramite questo comando:
 ```
 int vlan1
 ip address 192.168.0.2 255.255.255.0
+no shutdown
 exit
 ip default-gateway 192.168.0.254
 ntp server 192.168.1.100
 ```
-Questo perché, lo switch diventa un client di rete che richiede l'orario al server.
+Questo perché lo switch diventa un client di rete che richiede l'orario al server.
 Solitamente, non si usa mai la vlan1 come default, ma si crea una vlan dedicata per motivi di sicurezza.
 
 
@@ -167,11 +168,11 @@ address         ref clock       st   when     poll    reach  delay          offs
 ```
 
 📌 Risultato:
-Il router e lo switch si sincronizzano correttamente con il server NTP configurato. Entrambi risultano sincronizzati (Stratum 2) e utilizzano il server 192.168.1.100 come riferimento temporale.
+Lo switch e il router si sincronizzano correttamente con il server NTP configurato. Entrambi risultano sincronizzati (Stratum 2) e utilizzano il server 192.168.1.100 come riferimento temporale. La corretta sincronizzazione garantisce che tutti i dispositivi della rete condividano la stessa base temporale, requisito fondamentale per il corretto funzionamento dei servizi di rete e per l'analisi degli eventi di sistema.
 
 ❓ Cos'è l'NTP? 
 
-Il Network Time Protocol (NTP) è un protocollo standard di rete utilizzato per sincronizzare gli orologi dei dispositivi collegati a una rete. Una corretta sincronizzazione dell'ora è fondamentale in numeri contesti informatici, come l'analisi dei log, l'autenticazione, i certificati digitali, il monitoraggio della rete e la correlazione degli eventi di sicurezza.
+Il Network Time Protocol (NTP) è un protocollo standard di rete utilizzato per sincronizzare gli orologi dei dispositivi collegati a una rete. Una corretta sincronizzazione dell'ora è fondamentale in numerosi contesti informatici, come l'analisi dei log, l'autenticazione, i certificati digitali, il monitoraggio della rete e la correlazione degli eventi di sicurezza.
 
 ❓ Come funziona l'NTP?
 
@@ -201,6 +202,43 @@ il client calcola:
 
 Se la differenza rientra nei limiti previsti, il client aggiorna gradualmente il proprio orologio evitando bruschi salti temporali.
 
+❓ Cos'è lo Stratum?
+
+Lo Stratum indica la distanza dalla sorgente primaria del tempo. Più il valore è basso, maggiore la precisione dell'orologio.
+Solitamente si parte da 0 con orologi atomici, GPS e orologi al cesio.
+Ogni server sincronizzato con un server di stratum inferiore incrementa il proprio livello di uno. Di conseguenza, aumentando lo stratum aumenta anche la distanza dalla sorgente primaria del tempo.
+Nel nostro output ci viene mostrato:
+```
+Clock is synchronized, stratum 2
+```
+
+📌 Analisi dei pacchetti con Wireshark
+
+Per comprendere al meglio il funzionamento del protocollo NTP è stata effettuata una cattura del traffico tramite Wireshark durante la sincronizzazione dell'orologio tra client e server.
+
+![Topologia](img/ntp.png)
+
+E' possibile osservare che il protocollo utilizza UDP porta 123, scelta che riduce l'overhead rispetto a TCP e rende più efficiente la sincronizzazione periodica dell'orario.
+
+1. NTP Client Request (pacchetto n. 1201)
+
+Il client invia un pacchetto NTP Version 4 in modalità client verso il server NTP, allegando il timestamp trasmit:
+
+==> **Transmit timestamp: Jul  8, 2026 11:51:49.073683738 UTC**
+
+2. NTP Server Response (pacchetto n. 1202)
+
+Pochissimi millisecondi dopo, il server NTP risponde al client in modalità server allegando il timestamp Originale, il timestamp Ricevuto (rappresenta l'istante in cui il server riceve la richiesta del client) e il timestamp Trasmesso (rappresenta l'istante in cui il server invia la risposta):
+
+==>**Origin timestamp: Jul  8, 2026 11:51:49.073683738 UTC**
+==>**Receive timestamp: Jul  8, 2026 11:51:49.072596877 UTC**
+==>**Trasmit timestamp: Jul  8, 2026 11:51:49.072780957 UTC**
+
+E' inoltre possibile vedere lo Stratum:
+
+==>**Peer Clock Stratum: secondary reference (2)**
+
+
 # 🛠️ Problemi riscontrati
 
-Durante la configurazione è stato necessario assegnare un indirizzo IP all'interfaccia virtuale VLAN1 dello switch. In assegna di una SVI configurata, lo switch opera esclusivamente a livello 2 e non è in grado di generare traffico IP né di sincronizzarsi con il server NTP.
+Durante la configurazione è stato necessario assegnare un indirizzo IP all'interfaccia virtuale VLAN 1 dello switch. In assenza di una SVI configurata, lo switch opera esclusivamente a livello 2 e non è in grado di generare traffico IP né di sincronizzarsi con il server NTP.
