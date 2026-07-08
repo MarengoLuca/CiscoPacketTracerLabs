@@ -16,7 +16,7 @@ Schema della Rete realizzata:
 ## 🧰 Dispositivi utilizzati
 |  Dispositivo  |  Quantità  |
 |--|--|
-| Cisco Catalyst 2960 | 1 |
+| Cisco Catalyst 2911 | 1 |
 | Cisco 2960-24TT | 1 |
 | PC | 1 |
 | Cavi Copper Straight-Through | 2 |
@@ -93,7 +93,7 @@ ip ssh version 2 --> abilita solo le connessioni con SSHv2 ed esclude quelle con
 
 ## 🛠️ Test Effettuati
 
-Verifica dell'effettivo collegamento dei PC allo Switch tramite il comando:
+Verifica dell'effettivo collegamento del PC allo Switch tramite il comando:
 
 ```
 show interfaces status
@@ -155,7 +155,7 @@ Infine avviene la terza fase, in cui viene trasmesso il Payload, dunque i dati i
 
 ![Topologia](img/telnet.png)
 
-📌 Conclusione: 
+📌 Conclusione 1:  
 Il protocollo Telnet risulta essere vulnerabile da Sniffing compromettendo la riservatezza della comunicazione in quanto non esiste una sicurezza.
 
 **SSH**
@@ -183,7 +183,7 @@ Successivamente avviene la fase dello scambio dei dati: in questa fase, Wireshar
 Inoltre possiamo notare che avviene un **[TCP Retransmission]**, dove il server risponde con un ACK e il client ritrasmette il pacchetto perso.
 Successivamente avviene un buco nella ricezione dei dati.
 
-📌 Conclusione: 
+📌 Conclusione 2: 
 Il protocollo SSH risulta essere molto più sicuro rispetto al Telnet, applicando varie regole della sicurezza.
 Il protocollo SSH funziona attraverso una fase iniziale in chiaro, dove avviene la Negoziazione dell'Algoritmo subito dopo il Three-Way Handshake e si mettono negoziano su quale algoritmo di crittografia utilizzare. Successivamente, avviene lo scambio delle chiavi tramite l'algoritmo Diffie-Hellman, dove il client e il server riescono a calcolare e generare indipendentemente la stessa identica chiave segreta  senza condividere informazioni nella rete (Detta **chiave simmetrica**). Da questo punto in poi, il traffico diventa cifrato. Nel terzo passaggio avviene l'autenticazione del server, dove il client salva la chiave pubblica del server, con lo scopo di evitare il Man-in-the-Middle. Nel quarto passaggio, avviene l'autenticazione del Client dove viene richiesta la password dell'utente specificato.
 Come ultimo passaggio avviene l'apertura del canale, dove vengono trasmessi i dati dell'applicazione attraverso un canale cifrato, decifrati e mostrati a schermo.
