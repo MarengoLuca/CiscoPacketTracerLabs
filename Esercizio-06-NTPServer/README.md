@@ -230,9 +230,9 @@ Il client invia un pacchetto NTP Version 4 in modalità client verso il server N
 
 Pochissimi millisecondi dopo, il server NTP risponde al client in modalità server allegando il timestamp Originale, il timestamp Ricevuto (rappresenta l'istante in cui il server riceve la richiesta del client) e il timestamp Trasmesso (rappresenta l'istante in cui il server invia la risposta):
 
-==>**Origin timestamp: Jul  8, 2026 11:51:49.073683738 UTC**
-==>**Receive timestamp: Jul  8, 2026 11:51:49.072596877 UTC**
-==>**Trasmit timestamp: Jul  8, 2026 11:51:49.072780957 UTC**
+==>**Origin timestamp: Jul  8, 2026 11:51:49.073683738 UTC**<br>
+==>**Receive timestamp: Jul  8, 2026 11:51:49.072596877 UTC**<br>
+==>**Trasmit timestamp: Jul  8, 2026 11:51:49.072780957 UTC**<br>
 
 E' inoltre possibile vedere lo Stratum:
 
