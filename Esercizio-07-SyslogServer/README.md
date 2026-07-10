@@ -28,7 +28,7 @@ Schema della Rete realizzata:
 | 💻 PC1 | 192.168.0.11 | 255.255.255.0 | 192.168.0.254 |
 | 💻 PC2 | 192.168.0.12 | 255.255.255.0 | 192.168.0.254 |
 | 🔀 SW1 | 192.168.0.2 | 255.255.255.0 | 192.168.0.254 |
-| 🌐 SERVER | 192.168.1.100 | 255.255.255.0 | 192.168.1.254 |
+| 🌐 SERVER | 192.168.0.100 | 255.255.255.0 | 192.168.1.254 |
 
 ## ⚙️ Configurazione Eseguita
 
@@ -135,6 +135,10 @@ con seguente Output:
 Interface              IP-Address      OK? Method Status                Protocol 
 GigabitEthernet0/1     192.168.0.254   YES manual up                    up 
 ```
+
+Verifica del funzionamento del server Syslog:
+
+
 
 # 🛠️ Problemi riscontrati
 
