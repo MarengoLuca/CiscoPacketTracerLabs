@@ -137,7 +137,89 @@ GigabitEthernet0/1     192.168.0.254   YES manual up                    up
 ```
 
 Verifica del funzionamento del server Syslog:
+Per verificare il corretto funzionamento del server Syslog, sono stati simulati alcuni eventi che possono verificarsi quotidianamente in una rete aziendale, come la disconnessione di dispositivi o l'indisponibilità di alcune interfacce di rete.
 
+Per prima cosa è stata disabilitata l'interfaccia GigabitEthernet0/0 del router tramite il comando:
+```
+shutdown
+```
+
+Successivamente sono state disabilitate le interfacce FastEthernet0/1 e FastEthernet0/2 dello switch, simulando la perdita di connettività dei due PC collegati:
+```
+shutdown
+```
+
+Il risultato della simulazione è il seguente:
+
+![Topologia](img/topologiaDown.png)
+
+Analizzando i log ricevuti dal server Syslog è possibile osservare quanto segue:
+
+![Syslog](img/Syslog.png)
+
+Lo switch ha inviato correttamente al server i messaggi relativi alla disattivazione delle due porte. Al contrario, il router non ha potuto inviare alcun messaggio riguardante la disattivazione della propria interfaccia, poiché proprio quell'interfaccia rappresentava l'unico collegamento disponibile verso il server Syslog. Una volta disabilitata, il router ha perso la connettività IP necessaria per trasmettere ulteriori messaggi di log.
+
+Riabilitando successivamente le porte tramite il comando:
+```
+no shutdown
+```
+
+è possibile osservare che lo switch ha nuovamente inviato al server Syslog i messaggi che segnalano il ripristino delle interfacce:
+
+![Syslog](img/SyslogUp.png)
+
+📌 Osservazione:
+
+Questo test dimostra uno dei limiti del protocollo Syslog: se un dispositivo perde completamente la connettività verso il server, gli eventi successivi non posso essere trasmessi. Per questo motivo, nelle infrastrutture di produzione è buona pratica utilizzare collegamenti rindondanti e sistemi di monitoraggio complementari, in modo da rilevare anche la perdita di connettività dei dispositivi.
+
+❓ Cos'è Syslog?
+
+Syslog, è un protocollo standard utilizzato nei sistemi operativi simili a Unix e nei dispositivi di rete (come router, firewall) per inviare e raccogliere messaggi di log.
+Permette di raccogliere log dalla maggior parte dei dispositivi di rete.
+
+❓ Perché viene utilizzato?
+
+Risulta utile per monitorare infrastrutture, fare troubleshooting, auditing, analisi degli incidenti e per la sicurezza informatica.
+In reti aziendali con centinaia di dispositivi sarebbe impossibile consultare manualmente i log di ogni apparato. Un server Syslog (detto **collector**) permette di raccogliere tutti gli eventi in un unico punto.
+
+❓ Come funziona? 
+
+Router
+      \
+       \
+Switch ---> Server Syslog
+       /
+Firewall
+
+In un infrastruttura ci sono i client che generano un messaggio assegnandogli un livello di gravità e successivamente viene spedito al collector, ovvero il server.
+Nello specifico funziona così:
+
+1. si verifica un evento;
+2. il dispositivo genera un messaggio;
+3. assegna un livello di gravità;
+4. invia il log al server;
+5. il server lo archivia;
+
+❓ Quali sono i livelli di gravità?
+
+I livelli di gravità syslog (standard RFC 5424) sono classificati su una scala da 0 a 7, dove 0 indica l'emergenza più grave e 7 i dettagli del debug.
+
+| Livello | Nome
+|--|--|
+| 0 | Emergency |
+| 1 | Alert |
+| 2 | Critical |
+| 3 | Error |
+| 4 | Warning |
+| 5 | Notification |
+| 6 | International |
+| 7 | Debugging |
+
+Nel caso dell'esercizio, è stato scelto il livello 7, che implementa informazioni dettagliate per la risoluzione dei problemi.
+
+❓ Quale protocollo e porta utilizza?
+
+Syslog utilizza di default il protocollo UDP porta 514.
 
 
 # 🛠️ Problemi riscontrati
