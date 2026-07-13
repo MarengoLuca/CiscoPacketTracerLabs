@@ -24,7 +24,7 @@ Raccolta di esercizi di rete con documentazione tecnica
 6. **NTP server - sincronizzazione oraria**:
    Configurazione di un NTP server e sincronizzazione di tutti i dispositivi nella rete. ==> [Esercizio-06](./Esercizio-06-NTPServer)
 7. **Syslog server**:
-   Configurazione di dispositivi Cisco per inviare log a un server Syslog centralizzato
+   Configurazione di dispositivi Cisco per inviare log a un server Syslog centralizzato ==> [Esercizio-07](./Esercizio-07-SyslogServer)
 8. **Password e banner di sicurezza**:
    Configurazione di password tramite enable, secret, console, VTY e banner MOTD su router e Switch.
 
