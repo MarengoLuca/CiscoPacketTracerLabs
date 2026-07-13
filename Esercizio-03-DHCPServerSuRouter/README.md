@@ -35,7 +35,7 @@ Gli indirizzi IP riportati sono stati assegnati automaticamente dal servizio DHC
 
 ###  💻 Computer
 
-Indirizzi configurati tramite DCHP Server
+Indirizzi configurati tramite DHCP Server
 
 ### 🔀 Switch
 
@@ -43,7 +43,7 @@ Lo switch opera in modalità Layer 2 con configurazione di default (VLAN 1)
 
 ### 🖧 Router
 
-Configurazione del interfaccia Gig0/0 tramite i seguenti comandi:
+Configurazione dell'interfaccia Gig0/0 tramite i seguenti comandi:
 ```
 conf t
 int Gig0/0
@@ -143,12 +143,12 @@ Verifica della comunicazione tramite ping:
 
 ❓ Com'è il servizio DHCP? 
 
-Il DHCP (Dynamic Host Configuration Protocol) è un protocollo applicativo (ausiliario) che permette ai dispositivi di una rete locale di ricevere automaticamente ad ogni richiesta di accesso, la configurazione IP necessaria alla comunicazione evitando la configurazione manuale di ogni host.
+Il DHCP (Dynamic Host Configuration Protocol) è un protocollo applicativo che permette ai dispositivi di una rete locale di ricevere automaticamente ad ogni richiesta di accesso, la configurazione IP necessaria alla comunicazione evitando la configurazione manuale di ogni host.
 Il protocollo è spesso implementato tramite **server** oppure tramite **router**.
 Esistono due possibili configurazioni:
 
-- DHCP Stateful: il server assegna tradizionalmente gli indirizzi IP ai dispositivi
-- DHCP Stateless: i dispositivi sono in grado di generarsi autonomamente gli indirizzi IP tramite la procedura SLAAC. Il server DHCP server a condividere parametri secondari come i DNS.
+- DHCP Stateful: il server assegna ai client l'indirizzo IP e tutti i parametri di rete.
+- DHCP Stateless (IPv6): l'indirizzo IP viene generato autonomamente dal client tramite SLAAC, mentre il server DHCP fornisce solo informazioni aggiuntive, come i server DNS.
 
 ❓ Come funziona il DHCP?
 
@@ -184,7 +184,7 @@ il server conferma definitivamente l'assegnazione dell'indirizzo.
 
 ❓ Cos'è il Lease Time?
 
-Il Lease Time è il tempo in cui è valido quell'indirizzo IP. Questo perché l'IP assegnato non appartiene definitivamente al client, ma viene concesso per un determinato intervallo di tempo. Alla scadeva il client richiede il rinnovo della concessione.
+Il Lease Time è il tempo in cui è valido quell'indirizzo IP. Questo perché l'IP assegnato non appartiene definitivamente al client, ma viene concesso per un determinato intervallo di tempo. Alla scademza il client richiede il rinnovo della concessione.
 
 E' possibile visualizzare informazioni importati sul DHCP tramite il comando:
 
@@ -211,13 +211,46 @@ FastEthernet0 Connection:(default port)
    DNS Servers.....................: ::
                                      8.8.8.8
 ```
+
+Da questo output è possibile verificare quale server DHCP ha assegnato l'indirizzo IP e quali parametri sono stati ricevuti automaticamente.
+
 📌 Conclusione:
 
 Il protocollo DHCP semplifica notevolmente la gestione delle reti, consentendo ai dispositivi di ottenere automaticamente la configurazione necessaria alla comunicazione. In questo esercizio il router ha svolto sia la funzione di gateway sia quella di server DHCP, assegnando dinamicamente gli indirizzi IP ai client mediante il processo DORA.
 
+📌 Analisi dei pacchetti tramite Wireshark:
+
+Tramite wireshark, sono riuscito ad analizzare nel dettaglio le quattro fasi del processo DORA.
+
+![Wireshark](img/wireshark.png)
+
+1. **Discover (Pacchetto n. 1522)**
+
+Il client con sorgente 0.0.0.0 spedisce un messaggio di tipo broadcast (255.255.255.255) utilizzando la porta 68 --> 67 e attendendo una risposta da parte di un DHCP Server / Router.
+All'interno del pacchetto è possibile trovare il MAC Address del client, l'Hostname e alcuni parametri richiesti al server:
+
+![Parametri](img/parametri.png)
+
+2. **Offer (Pacchetto n. 1536)**
+
+Il server risponde alla richiesta broadcast proponendo un indirizzo IP disponibile (10.10.170.8) e inoltrando i parametri richiesti dal client, come il DHCP Server Identifier, l'IP Lease Time, la Subnet Mask, il Router e il DNS.
+
+3. **Request (Pacchetto n. 1537)**
+
+Il client non ha ancora ufficializzato l'IP, dunque spedisce un altro messaggio di tipo broadcast per accettare l'offerta del server 10.10.171.254 per l'indirizzo 10.10.170.8. Spedendo il messaggio in broadcast, avverte gli altri server DHCP sulla stessa rete che la loro offerta è stata rifiutata.
+
+4. **ACK (Pacchetto n. 1538)**
+
+Il server chiude la conversazione avvisando il client (che ora ha acquisito l'indirizzo IP) che l'indirizzo è suo per il tempo stabilito (lease time).
+Da questo momento il client può utilizzare l'indirizzo IP assegnato per comunicare sulla rete.
+
+📌 Osservazione:
+
+E' possibile osservare come tutti i pacchetti abbiano lo stesso **Transaction ID (0x6be8dcf7)**. Questo identificativo unico serve al client e al server per capire che tutti e quattro i messaggi fanno parte della stessa identica conversazione e non di richieste inviate da altri dispositivi connessi contemporaneamente.È inoltre possibile osservare che tutti i messaggi DHCP vengono trasmessi utilizzando UDP, sulla **porta 67 (server) e 68 (client)**.
+
 📌 Risultato:  
 Tutti i dispositivi comunicano correttamente all’interno della stessa rete IP tramite switching Layer 2 e gateway unico sul router.
-
+L'utilizzo del DHCP riduce il rischio di errori di configurazione manuale e rende molto più semplice l'amministrazione di reti con un elevato numero di dispositivi.
 
 # 🛠️ Problemi riscontrati
 
