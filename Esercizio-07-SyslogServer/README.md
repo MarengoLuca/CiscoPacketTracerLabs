@@ -62,10 +62,10 @@ service timestamps log datetime msec
 ```
 **Analisi comando service timestamps log datetime msec:**
 
---> ```service timestamps``` attiva la marcatura temporale per i servizi di sistema
---> ```log``` specifica che questa regola si applica ai messaggi di log
---> ```datetime``` sostituisce il counter dei minuti/giorni dall'avvio con la data e l'ora reali
---> ```msec``` aggiunge il massimo livello di precisione, mostrando anche i milli-secondi
+--> ```service timestamps``` attiva la marcatura temporale per i servizi di sistema<br>
+--> ```log``` specifica che questa regola si applica ai messaggi di log<br>
+--> ```datetime``` sostituisce il counter dei minuti/giorni dall'avvio con la data e l'ora reali<br>
+--> ```msec``` aggiunge il massimo livello di precisione, mostrando anche i milli-secondi<br>
 
 
 Questo perché lo switch diventa un client di rete che invia i logs al server.
