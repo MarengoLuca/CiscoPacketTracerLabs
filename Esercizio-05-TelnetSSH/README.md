@@ -81,15 +81,14 @@ ip ssh version 2
 
 Spiegazione comandi:
 
-```
-ip domain-name test.local --> definisce il nome del dominio per i device
-username admin secret securepassword123 --> crea utente admin e gli assegna la password
-crypto key generate rsa --> SSH utilizza la coppia di chiavi RSA, il comando permette di generare delle chiavi RSA di dimensione a nostra scelta per identificare il server e per lo scambio iniziale
-transport input ssh --> permette l'accesso tramite SSH
-login local --> obbliga gli utenti ad autenticarsi tramite un utente e una password configurati un database locale
-ip ssh version 2 --> abilita solo le connessioni con SSHv2 ed esclude quelle con obsolete con SSHv1
 
-```
+--> ```ip domain-name test.local``` definisce il nome del dominio per i device<br>
+--> ```username admin secret securepassword123``` crea utente admin e gli assegna la password<br>
+--> ```crypto key generate rsa``` SSH utilizza la coppia di chiavi RSA, il comando permette di generare delle chiavi RSA di dimensione a nostra scelta per identificare il server e per lo scambio iniziale<br>
+--> ```transport input ssh``` permette l'accesso tramite SSH<br>
+--> ```login local``` obbliga gli utenti ad autenticarsi tramite un utente e una password configurati un database locale<br>
+--> ```ip ssh version 2``` abilita solo le connessioni con SSHv2 ed esclude quelle con obsolete con SSHv1<br>
+
 
 ## 🛠️ Test Effettuati
 
