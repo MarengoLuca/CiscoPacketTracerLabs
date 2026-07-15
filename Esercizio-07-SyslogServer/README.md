@@ -219,7 +219,7 @@ Nel caso dell'esercizio, è stato scelto il livello 7, che implementa informazio
 
 ❓ Quale protocollo e porta utilizza?
 
-L'utilizzo di UDP permette di inviare i messaggi di log con un overhead ridotto, senza dover instaurare una connessione o attendere conferme di ricezione. Questa scelta rende il protocollo particolarmente efficiente, poiché router, switch e firewall possono generare un elevato numero di eventi in tempi molto brevi.
+L'utilizzo di UDP (porta 514) permette di inviare i messaggi di log con un overhead ridotto, senza dover instaurare una connessione o attendere conferme di ricezione. Questa scelta rende il protocollo particolarmente efficiente, poiché router, switch e firewall possono generare un elevato numero di eventi in tempi molto brevi.
 Lo svantaggio è che UDP non garantisce la consegna dei pacchetti: in caso di congestione della rete o perdita di connettività, alcuni messaggi di log potrebbero non raggiungere il server Syslog.
 È comunque possibile utilizzare Syslog su TCP (porta 601) o Syslog su TLS (porta 6514), soluzioni che garantiscono una maggiore affidabilità e, nel caso di TLS, anche la cifratura del traffico. Queste modalità sono spesso adottate negli ambienti di produzione dove l'integrità e la sicurezza dei log sono fondamentali.
 
