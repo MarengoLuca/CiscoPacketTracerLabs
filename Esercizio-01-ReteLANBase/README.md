@@ -2,7 +2,7 @@
 
 | 📂 **Categoria** | 🌐 **Protocollo/i** | 🔌 **Porta/e** | 📚 **Livello OSI** | 🎯 **Competenze acquisite** |
 |--|--|--|--|--|
-| Switching | Ethernet / ARP | N/D | 2 | MAC, IP, Frame, ARP, Flooding |
+| Switching | Ethernet / ARP / ICMP| N/D | 2 | MAC, IP, Frame, ARP, Flooding |
 
 ## 🎯 Obiettivo:
 
@@ -130,11 +130,11 @@ C:\>arp -a
 
 💡 **Da ricordare**
 
-MAC = identifica la scheda di rete
+- **MAC** → identifica la scheda di rete
 
-IP = identifica il dispositivo nella rete
+- **IP** → identifica il dispositivo nella rete
 
-ARP = collega IP e MAC
+- **ARP** → collega IP e MAC
 
 
 📌 Risultato

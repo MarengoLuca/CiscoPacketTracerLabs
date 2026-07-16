@@ -1,4 +1,9 @@
 # 🌐 Esercizio 02: Due Reti Un Router
+
+| 📂 **Categoria** | 🌐 **Protocollo/i** | 🔌 **Porta/e** | 📚 **Livello OSI** | 🎯 **Competenze acquisite** |
+|--|--|--|--|--|
+| Routing | Ethernet / ARP / IPv4 / ICMP | N/D | 2-3 | Routing, Gateway, Subnet, ARP, ICMP |
+
 ## 🎯 Obiettivo:
 
 Creare due reti LAN semplici collegate tramite Router,  ciascuna composta da 1 dispositivo finale collegato tramite uno Switch.
@@ -40,7 +45,16 @@ Configurati Manualmente:
 
 ### 🔀 Switch
 
-Nessuna configurazione è stata apportata.
+Lo switch opera in modalità Layer 2 con configurazione di default (VLAN 1)
+E' stato cambiato solo l'hostname tramite i comandi:
+
+```
+conf t
+hostname SW1
+
+```
+
+Non sono state apportate modifiche al funzionamento dello switch ad eccezione dell'hostname.
 
 ### 🖧 Router
 
@@ -65,9 +79,8 @@ write
 
 Verifica dell'effettivo collegamento dei PC agli Switch tramite il comando:
 
-```
-show interfaces status
-```
+```show interfaces status```
+
 con seguente Output:
 ```
 SW1
@@ -82,9 +95,8 @@ Gig0/1        connected  1      a-full    a-100   10/100/1000BaseTX
 ```
 Verifica della Switching Table dello Switch utilizzando il comando:
 
-```
-show mac address-table
-```
+```show mac address-table```
+
 con seguente Output:
 
 ```
@@ -103,9 +115,8 @@ Vlan Mac Address    Type     Ports
 1    00d0.ff60.6701 DYNAMIC  Gig0/1
 ```
 Verifica della Configurazione del Router tramite il comando:
-```
-show ip interface brief
-```
+```show ip interface brief```
+
 con seguente Output:
 
 ```
@@ -134,7 +145,7 @@ Poiché i due PC appartengono a due sottoreti differenti, non possono comunicare
 
 ❓ Cos'è il Default Gateway?
 
-Il Default Gateway rappresenta il punto di uscita della rete locale. Quando un dispositivo deve inviare un pacchetto verso una destinazione che non appartiene alla proprio sottorete, inoltra il traffico al gateway, lasciano al router il compito di individuare il percorso corretto.
+Il Default Gateway rappresenta il punto di uscita della rete locale. Quando un dispositivo deve inviare un pacchetto verso una destinazione che non appartiene alla propria sottorete, inoltra il traffico al gateway, lasciano al router il compito di individuare il percorso corretto.
 In questo caso:
 
 |  PC  |  Gateway  |
@@ -166,19 +177,17 @@ Questo gli permette di inoltrare i pacchetti tra le due LAN.
 
 Quando il PC1 invia un ping verso PC2, avvengono le seguenti operazioni:
 
-1. PC1 verifica che l'indirizzo IP di destinazione non appartenza alla propria sottorete.
+1. PC1 verifica che l'indirizzo IP di destinazione non appartiene alla propria sottorete.
 2. Il pacchetto viene inviato al Default Gateway.
 3. Il router riceve il pacchetto sulla porta Gig0/0
 4. Consulta la propria Routing Table
-5. Individua la rete 192.1680.2.0/24 come direttamente connessa.
+5. Individua la rete 192.168.2.0/24 come direttamente connessa.
 6. Inoltra il pacchetto attraverso l'interfaccia Gig0/1
 7. PC2 riceve il pacchetto e risponde seguendo lo stesso percorso in senso inverso.
 
 E' possibile visualizzare la Routing Table tramite il seguente comando:
 
-```
-show ip route
-```
+```show ip route```
 
 con seguente Output:
 
@@ -193,12 +202,42 @@ L       192.168.2.254/32 is directly connected, GigabitEthernet0/0
 Dove **C** sta per Connected e identifica la sottorete direttamente collegata a quell'interfaccia.
 **L** invece, identifica l'esatto indirizzo IP assegnato a quell'interfaccia.
 
+💡 **Da ricordare**
+
+- **Router** → collega reti differenti.
+- **Gateway** → punto di uscita della rete locale.
+- **Routing Table** → indica al router dove inoltrare i pacchetti.
+- **Connected Route (C)** → rete direttamente collegata al router.
+- **Local Route (L)** → indirizzo IP assegnato all'interfaccia del router.
+
+
+
 📌 Conclusione:
 
 In questo esercizio è stato possibile osservare come il router renda possibile la comunicazione tra reti differenti. Mentre gli switch si limitano a inoltrare i frame all'interno della stessa LAN utilizzando gli indirizzi MAC, il router analizza gli indirizzi IP e utilizza la Routing Table per instradare i pacchetti verso la rete di destinazione.
 
 📌 Risultato:  
 Tutti i dispositivi comunicano correttamente all'interno della rete. Le due LAN comunicano correttamente tramite routing a livello 3 effettuato dal router.
+
+📖 Concetti affrontati
+
+✔ **Routing Layer 3**
+
+✔ **Default Gateway**
+
+✔ **Routing Table**
+
+✔ **Connected Route**
+
+✔ **Local Route**
+
+✔ **IPv4**
+
+✔ **ICMP (Ping)**
+
+✔ **Ethernet**
+
+✔ **ARP**
 
 
 # 🛠️ Problemi riscontrati
