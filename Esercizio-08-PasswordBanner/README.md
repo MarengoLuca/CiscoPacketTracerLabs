@@ -118,5 +118,102 @@ transport input ssh
 login local
 ```
 
-
 ## 🛠️ Test Effettuati
+
+Verifica dell'effettivo collegamento del PC allo Switch tramite il comando:
+
+```
+show interfaces status
+```
+con seguente Output:
+```
+SW1
+Port    Name  Status     Vlan   Duplex    Speed   Type
+Fa0/1         connected  1      a-full    a-100   10/100BaseTX
+Gig0/1        connected  1      a-full    a-100   10/100/100BaseTX
+```
+
+Verifica della Switching Table dello Switch utilizzando il comando:
+
+```
+show mac address-table
+```
+con seguente Output:
+
+```
+SW1
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+
+   1    0060.5ca3.a901    DYNAMIC     Gig0/1
+```
+
+Verifica degli indirizzi IP assegnati alle porte del router tramite il comando:
+```
+show ip interface brief
+```
+
+con seguente Output:
+
+```
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0     192.168.0.254   YES manual up                    up 
+```
+
+Verifica del funzionamento dell'accesso console verso lo switch e il router:
+
+```
+ATTENZIONE! Accesso consentito solo al personale autorizzato.
+
+User Access Verification
+
+Password: 
+```
+
+Dopo l'inserimento della password per l'accesso alla console, digitando ```enable```, verrà richiesta la password per l'innalzamento dei privilegi:
+```
+SW1>enable
+Password: 
+SW1#
+```
+
+Possiamo notare come viene visualizzato anche il messaggio mtod.
+
+Analogalmente avviene la stessa cosa dal router:
+
+```
+ATTENZIONE! Accesso consentito solo al personale autorizzato.
+
+User Access Verification
+
+Password: 
+```
+
+Dopo l'inserimento della password per l'accesso alla console, digitando ```enable```, verrà richiesta la password per l'innalzamento dei privilegi:
+```
+R1>enable
+Password: 
+R1#
+```
+
+Provando invece il collegamento tramite SSH:
+
+```
+C:\>ssh -l admin 192.168.0.2
+
+Password: 
+
+ATTENZIONE! Accesso consentito solo al personale autorizzato.
+
+SW1>
+```
+
+```
+C:\>ssh -l admin 192.168.0.254
+
+Password: 
+
+ATTENZIONE! Accesso consentito solo al personale autorizzato.
+
+R1>
+```

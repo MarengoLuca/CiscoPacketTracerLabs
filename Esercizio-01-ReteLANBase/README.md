@@ -1,4 +1,9 @@
 # 🌐 Esercizio 01: Rete LAN base con Switch
+
+| 📂 **Categoria** | 🌐 **Protocollo/i** | 🔌 **Porta/e** | 📚 **Livello OSI** | 🎯 **Competenze acquisite** |
+|--|--|--|--|--|
+| Switching | Ethernet / ARP | N/D | 2 | MAC, IP, Frame, ARP, Flooding |
+
 ## 🎯 Obiettivo:
 
 Creare una rete LAN semplice composta da 4 dispositivi collegati tramite uno Switch.
@@ -6,6 +11,7 @@ Lo scopo dell'esercizio è:
 - Configurare gli indirizzi IP dei dispositivi
 - Verificare la comunicazione nella rete
 - Utilizzare il comando 'ping' per il test
+- Comprendere il funzionamento dello switching Ethernet e del protocollo ARP.
 
 ## 🖥️ Topologia di rete
 
@@ -20,7 +26,7 @@ Schema della Rete realizzata:
 | PC | 4 |
 | Cavi Copper Straight-Through | 4 |
 
-## 📡Configurazione IP
+## 📡 Configurazione IP
 | Dispositivo | Indirizzo IP | Subnet Mask |  
 |---|---|---|  
 | 💻 PC0 | 192.168.0.100 | 255.255.255.0 |  
@@ -48,14 +54,15 @@ hostname SW1
 
 ```
 
+Non sono state apportate modifiche al funzionamento dello switch ad eccezione dell'hostname.
+
 
 ## 🛠️ Test Effettuati
 
 Verifica dell'effettivo collegamento dei PC allo Switch tramite il comando:
 
-```
-show interfaces status
-```
+```show interfaces status```
+
 con seguente Output:
 ```
 Port Name Status     Vlan  Duplex   Speed   Type
@@ -70,9 +77,8 @@ Fa0/8     notconnect 1     auto     auto    10/100BaseTX
 ```
 Verifica della Switching Table dello Switch utilizzando il comando:
 
-```
-show mac address-table
-```
+```show mac address-table```
+
 con seguente Output:
 
 ```
@@ -89,6 +95,8 @@ Vlan Mac Address    Type     Ports
 Verifica della comunicazione tramite ping:  
 
 ✔ Test di connettività: tutti i ping riusciti tra i PC
+
+## 📚 Approfondimento teorico
 
 ❓ **Come funziona una Rete LAN?**
 
@@ -108,9 +116,7 @@ Quando un PC deve comunicare con un altro dispositivo nella stessa rete, invia u
 
 Si può trovare la ARP Table (o cache ARP) tramite il comando:
 
-```
-arp -a
-```
+```arp -a```
 
 con seguente Output:
 
@@ -122,11 +128,44 @@ C:\>arp -a
   192.168.0.103         0007.ec04.8b32        dynamic
 ```
 
-📌 Conclusione: All’interno di una LAN, la comunicazione tra dispositivi avviene grazie alla combinazione di indirizzi IP, utilizzati per identificare il destinatario logico, e indirizzi MAC, utilizzati per la consegna fisica dei frame. Il protocollo ARP e lo switch permettono di collegare questi due livelli e rendere possibile la comunicazione.
+💡 **Da ricordare**
+
+MAC = identifica la scheda di rete
+
+IP = identifica il dispositivo nella rete
+
+ARP = collega IP e MAC
 
 
-📌 Risultato:  
-Tutti i dispositivi comunicano correttamente all'interno della rete. La rete LAN funziona correttamente in configurazione flat con subnet 192.168.0.0/24. Tutti i nodi comunicano tramite switching Layer 2 senza necessità routing. 
+📌 Risultato
+
+--> Tutti i dispositivi comunicano correttamente.<br>
+
+--> Lo switch apprende automaticamente i MAC Address.<br>
+
+--> La risoluzione IP → MAC avviene tramite ARP.<br>
+
+--> Tutti gli host appartengono alla rete 192.168.0.0/24.<br>
+
+📖 Concetti affrontati
+
+✔ **Switching**
+
+✔ **Ethernet**
+
+✔ **Mac Address Table**
+
+✔ **Switching Layer 2**
+
+✔ **MAC Address**
+
+✔ **ARP**
+
+✔ **Broadcast**
+
+✔ **Gateway**
+
+✔ **Ping**
 
 
 # 🛠️ Problemi riscontrati

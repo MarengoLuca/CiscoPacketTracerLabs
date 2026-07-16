@@ -226,7 +226,7 @@ Lo svantaggio è che UDP non garantisce la consegna dei pacchetti: in caso di co
 📌 Analisi dei pacchetti con Wireshark:
 
 
-
+....
 
 # 🛠️ Problemi riscontrati
 
