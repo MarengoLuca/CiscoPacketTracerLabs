@@ -128,15 +128,6 @@ C:\>arp -a
   192.168.0.103         0007.ec04.8b32        dynamic
 ```
 
-💡 **Da ricordare**
-
-- **MAC** → identifica la scheda di rete
-
-- **IP** → identifica il dispositivo nella rete
-
-- **ARP** → collega IP e MAC
-
-
 📌 Risultato
 
 --> Tutti i dispositivi comunicano correttamente.<br>
@@ -146,26 +137,6 @@ C:\>arp -a
 --> La risoluzione IP → MAC avviene tramite ARP.<br>
 
 --> Tutti gli host appartengono alla rete 192.168.0.0/24.<br>
-
-📖 Concetti affrontati
-
-✔ **Switching**
-
-✔ **Ethernet**
-
-✔ **Mac Address Table**
-
-✔ **Switching Layer 2**
-
-✔ **MAC Address**
-
-✔ **ARP**
-
-✔ **Broadcast**
-
-✔ **Gateway**
-
-✔ **Ping**
 
 
 # 🛠️ Problemi riscontrati

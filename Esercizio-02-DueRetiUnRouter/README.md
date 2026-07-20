@@ -202,42 +202,12 @@ L       192.168.2.254/32 is directly connected, GigabitEthernet0/0
 Dove **C** sta per Connected e identifica la sottorete direttamente collegata a quell'interfaccia.
 **L** invece, identifica l'esatto indirizzo IP assegnato a quell'interfaccia.
 
-💡 **Da ricordare**
-
-- **Router** → collega reti differenti.
-- **Gateway** → punto di uscita della rete locale.
-- **Routing Table** → indica al router dove inoltrare i pacchetti.
-- **Connected Route (C)** → rete direttamente collegata al router.
-- **Local Route (L)** → indirizzo IP assegnato all'interfaccia del router.
-
-
-
 📌 Conclusione:
 
 In questo esercizio è stato possibile osservare come il router renda possibile la comunicazione tra reti differenti. Mentre gli switch si limitano a inoltrare i frame all'interno della stessa LAN utilizzando gli indirizzi MAC, il router analizza gli indirizzi IP e utilizza la Routing Table per instradare i pacchetti verso la rete di destinazione.
 
 📌 Risultato:  
 Tutti i dispositivi comunicano correttamente all'interno della rete. Le due LAN comunicano correttamente tramite routing a livello 3 effettuato dal router.
-
-📖 Concetti affrontati
-
-✔ **Routing Layer 3**
-
-✔ **Default Gateway**
-
-✔ **Routing Table**
-
-✔ **Connected Route**
-
-✔ **Local Route**
-
-✔ **IPv4**
-
-✔ **ICMP (Ping)**
-
-✔ **Ethernet**
-
-✔ **ARP**
 
 
 # 🛠️ Problemi riscontrati

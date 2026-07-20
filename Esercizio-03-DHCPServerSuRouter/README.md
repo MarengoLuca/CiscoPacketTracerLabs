@@ -252,16 +252,6 @@ Il server chiude la conversazione avvisando il client (che ora ha acquisito l'in
 Da questo momento il client può utilizzare l'indirizzo IP assegnato per comunicare sulla rete.
 
 
-💡 **Da ricordare**
-
-- **DORA** → Discover, Offer, Request, ACK
-
-- **Lease Time** → tempo validità dell'IP
-
-- **Pool** → range di indirizzi disponibili
-
-- **DHCP Port** → 67 / 68
-
 📌 Osservazione:
 
 E' possibile osservare come tutti i pacchetti abbiano lo stesso **Transaction ID (0x6be8dcf7)**. Questo identificativo unico serve al client e al server per capire che tutti e quattro i messaggi fanno parte della stessa identica conversazione e non di richieste inviate da altri dispositivi connessi contemporaneamente.È inoltre possibile osservare che tutti i messaggi DHCP vengono trasmessi utilizzando UDP, sulla **porta 67 (server) e 68 (client)**.
@@ -271,17 +261,6 @@ Tutti i dispositivi comunicano correttamente all’interno della stessa rete IP 
 L'utilizzo del DHCP riduce il rischio di errori di configurazione manuale e rende molto più semplice l'amministrazione di reti con un elevato numero di dispositivi.
 
 # 🛠️ Problemi riscontrati
-
-📖 Concetti affrontati
-
-✔ **DHCP**
-
-✔ **DORA**
-
-✔ **Pool**
-
-✔ **Lease Time**
-
 
 Nessun problema rilevato.
 
